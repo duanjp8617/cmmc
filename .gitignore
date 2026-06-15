@@ -4,3 +4,4 @@ bin
 .cache
 __pycache__
 .DS_Store
+build-docker-getting-started
