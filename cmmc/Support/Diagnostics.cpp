@@ -82,10 +82,11 @@ Optional(const std::deque<T>&) -> Optional<T>;
     out << "Context: "sv << std::endl;
     std::apply([&](auto&... args) { (out << ... << Optional{ args }); }, mContext);
     out << std::flush;
-    if constexpr(Config::debug)
-        __builtin_trap();
-    else
-        std::exit(EXIT_FAILURE);
+    // if constexpr(Config::debug)
+    //     __builtin_trap();
+    // else
+    //     std::exit(EXIT_FAILURE);
+    std::exit(EXIT_FAILURE);
 }
 
 DiagnosticsContext& DiagnosticsContext::get() {
