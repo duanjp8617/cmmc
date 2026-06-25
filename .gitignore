@@ -5,3 +5,5 @@ bin
 __pycache__
 .DS_Store
 build-docker-getting-started
+local
+compile_commands.json
