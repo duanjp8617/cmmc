@@ -1638,16 +1638,10 @@ ConstantValue* ArrayInitializer::shapeAwareEmitStaticImpl(EmitContext& ctx, cons
         const auto subCount = subArrayType->getScalarCount();
         for(uint32_t idx = 0; idx < count; ++idx) {
             const auto beg = offset + subCount * idx;
-            const auto end = offset + subCount * (idx + 1);
-
-            auto begIter = values.lower_bound(beg);
-            auto endIter = values.lower_bound(end);
-
-            if(begIter != endIter) {
-                if(elements.size() != idx)
-                    DiagnosticsContext::get().attach<Reason>("sparse array initialization is not supported").reportFatal();
-                elements.push_back(shapeAwareEmitStaticImpl(ctx, values, beg, subArrayType, dstQualifier));
-            }
+            
+            if(elements.size() != idx)
+                DiagnosticsContext::get().attach<Reason>("sparse array initialization is not supported").reportFatal();
+            elements.push_back(shapeAwareEmitStaticImpl(ctx, values, beg, subArrayType, dstQualifier));
         }
     } else {
         for(uint32_t idx = 0; idx < count; ++idx) {
